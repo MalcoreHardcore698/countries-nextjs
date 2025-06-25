@@ -76,7 +76,7 @@ export async function fetchCountries(): Promise<Country[]> {
 
   return countries.map((country: RawCountry) => ({
     nameRu: country.name_ru,
-    flagUrl: country.flag_url || "",
+    flagUrl: country.flag_url ? `https:${country.flag_url}` : "",
     isoCode2: country.iso_code2,
     isoCode3: country.iso_code3,
   }));

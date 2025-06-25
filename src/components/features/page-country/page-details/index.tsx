@@ -35,7 +35,7 @@ function PageDetails({ country }: PageDetailsProps) {
           <div className="page-details__flag-image-container">
             {country.flagUrl ? (
               <Image
-                src={`https:${country.flagUrl}`}
+                src={country.flagUrl}
                 alt={`Flag of ${country.nameRu}`}
                 fill
                 className="flag-image"

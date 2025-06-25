@@ -22,9 +22,14 @@ interface CountryCardProps {
 
 function CountryCard({ country, onRemove }: CountryCardProps) {
   const [isRemoving, setIsRemoving] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const handleRemove = () => {
     setIsRemoving(true);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
   };
 
   const onAnimationComplete = () => {
@@ -47,13 +52,16 @@ function CountryCard({ country, onRemove }: CountryCardProps) {
     >
       <div className="country-card">
         <Image
-          src={country.flagUrl || DEFAULT_FLAG_URL}
+          src={
+            imageError || !country.flagUrl ? DEFAULT_FLAG_URL : country.flagUrl
+          }
           alt={country.nameRu || "Flag"}
           width={24}
           height={16}
           className="country-card__flag"
           fetchPriority="high"
           loading="eager"
+          onError={handleImageError}
         />
 
         <span className="country-card__name">{country.nameRu}</span>
