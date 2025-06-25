@@ -1,0 +1,18 @@
+@use "@/styles/variables" as vars;
+@use "@/styles/mixins" as mixins;
+
+.page-country {
+  flex: 1;
+
+  margin-block-end: vars.$spacing-10;
+
+  &__container {
+    @include mixins.container-responsive;
+  }
+
+  &__card {
+    @include mixins.surface-card;
+
+    overflow: hidden;
+  }
+}

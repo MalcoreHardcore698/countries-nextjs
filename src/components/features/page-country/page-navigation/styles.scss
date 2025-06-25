@@ -1,0 +1,29 @@
+@use "@/styles/mixins" as mixins;
+@use "@/styles/variables" as vars;
+
+.back-navigation {
+  margin-bottom: vars.$spacing-6;
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: vars.$spacing-2;
+
+    color: vars.$primary-blue;
+    font-weight: vars.$font-weight-medium;
+    text-decoration: none;
+
+    transition: vars.$transition-colors;
+
+    &:hover {
+      color: vars.$primary-blue-hover;
+    }
+
+    .back-icon {
+      width: vars.$size-5;
+      height: vars.$size-5;
+
+      margin-inline-end: vars.$spacing-2;
+    }
+  }
+}

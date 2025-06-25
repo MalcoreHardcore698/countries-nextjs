@@ -1,0 +1,18 @@
+@use "@/styles/variables" as vars;
+@use "@/styles/mixins" as mixins;
+
+.main-layout {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 880px;
+  min-height: 100vh;
+
+  margin: 0 auto;
+  padding: vars.$spacing-8;
+  padding-block-end: 0;
+
+  @include mixins.mobile-only {
+    padding: vars.$spacing-4;
+  }
+}

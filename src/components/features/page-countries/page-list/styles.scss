@@ -1,0 +1,59 @@
+@use "@/styles/variables" as vars;
+@use "@/styles/mixins" as mixins;
+@use "sass:color";
+
+.page-list {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  width: 100%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: vars.$spacing-10;
+    z-index: vars.$z-index-sticky;
+
+    width: calc(100% - vars.$spacing-10 * 2);
+    height: 1px;
+    background-color: vars.$gray-200;
+  }
+
+  &__virtuoso {
+    flex: 1;
+
+    padding: vars.$spacing-4 vars.$spacing-10;
+
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &>div {
+      width: calc(100% - 80px) !important;
+
+      padding-block: vars.$spacing-4 !important;
+      padding-block-start: vars.$spacing-4 !important;
+    }
+  }
+
+  @include mixins.mobile-only {
+    &::before {
+      left: vars.$spacing-2;
+      width: calc(100% - vars.$spacing-2 * 2);
+    }
+
+    &__virtuoso {
+      padding: vars.$spacing-2;
+
+      &>div {
+        width: calc(100% - (vars.$spacing-2 * 2)) !important;
+      }
+    }
+  }
+}

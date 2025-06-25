@@ -1,0 +1,117 @@
+@use "@/styles/mixins" as mixins;
+@use "@/styles/variables" as vars;
+
+.page-header {
+  @include mixins.card-surface;
+
+  position: sticky;
+  top: 0;
+  z-index: vars.$z-index-sticky;
+
+  margin-inline: 40px;
+  margin-block-end: vars.$spacing-4;
+
+  .header-content {
+    @include mixins.container-responsive;
+
+    & {
+      padding: vars.$spacing-6 vars.$spacing-4;
+    }
+
+    .header-main {
+      display: flex;
+      flex-direction: column;
+      gap: vars.$spacing-4;
+
+      @include mixins.tablet-up {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .title-section {
+    h1 {
+      font-size: vars.$font-size-4xl;
+      font-weight: vars.$font-weight-bold;
+
+      @include mixins.gradient-text-blue;
+
+      @include mixins.desktop-up {
+        font-size: vars.$font-size-6xl;
+      }
+
+      .loading-indicator {
+        display: inline-block;
+        margin-left: vars.$spacing-3;
+        font-size: vars.$font-size-2xl;
+        animation: spin 1s linear infinite;
+      }
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: vars.$spacing-2;
+
+      color: vars.$gray-600;
+      font-weight: vars.$font-weight-medium;
+
+      .total-count {
+        font-weight: vars.$font-weight-bold;
+        color: vars.$primary-blue;
+      }
+
+      .shown-count {
+        font-weight: vars.$font-weight-bold;
+        color: vars.$primary-purple;
+      }
+    }
+  }
+
+  .search-container {
+    position: relative;
+
+    .search-input-wrapper {
+      position: relative;
+
+      .search-input {
+        @include mixins.search-input;
+      }
+
+      .search-icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+
+        display: flex;
+        align-items: center;
+
+        padding-inline-end: vars.$spacing-4;
+
+        .search-spinner {
+          @include mixins.spinner-primary(vars.$size-5);
+        }
+
+        .search-svg {
+          width: vars.$size-6;
+          height: vars.$size-6;
+
+          color: vars.$gray-400;
+
+          transition: vars.$transition-colors;
+
+          .search-container:hover & {
+            color: vars.$primary-blue;
+          }
+        }
+      }
+    }
+  }
+
+  @include mixins.mobile-only {
+    margin-inline: vars.$spacing-2;
+  }
+}

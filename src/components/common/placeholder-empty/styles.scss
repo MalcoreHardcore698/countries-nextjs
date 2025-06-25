@@ -1,0 +1,44 @@
+@use "@/styles/mixins" as mixins;
+@use "@/styles/variables" as vars;
+
+.placeholder-empty {
+  @include mixins.flex-center;
+
+  flex-direction: column;
+
+  padding: vars.$spacing-24 0;
+
+  .empty-state-card {
+    @include mixins.surface-card;
+
+    max-width: 28rem;
+
+    padding: vars.$spacing-12;
+
+    border-radius: vars.$radius-xl;
+
+    text-align: center;
+
+    .emoji {
+      margin-block-end: vars.$spacing-6;
+
+      font-size: vars.$font-size-6xl;
+
+      filter: drop-shadow(vars.$shadow-xl);
+    }
+
+    h3 {
+      margin-block-end: vars.$spacing-4;
+
+      font-size: vars.$font-size-2xl;
+      font-weight: vars.$font-weight-bold;
+      color: vars.$gray-700;
+    }
+
+    p {
+      font-size: vars.$font-size-lg;
+      line-height: vars.$line-height-relaxed;
+      color: vars.$gray-600;
+    }
+  }
+}

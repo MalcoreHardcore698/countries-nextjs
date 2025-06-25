@@ -1,0 +1,565 @@
+@use 'variables' as vars;
+
+/* ==========================================================================
+   RESPONSIVE MIXINS
+   ========================================================================== */
+
+@mixin mobile-only {
+  @media (max-width: #{vars.$breakpoint-sm - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: vars.$breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (min-width: vars.$breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin large-up {
+  @media (min-width: vars.$breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin extra-large-up {
+  @media (min-width: vars.$breakpoint-xl) {
+    @content;
+  }
+}
+
+@mixin responsive($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+/* ==========================================================================
+   SURFACE MIXINS
+   ========================================================================== */
+
+@mixin surface-light {
+  background: vars.$white-90;
+  border: 1px solid vars.$white-30;
+}
+
+@mixin surface-medium {
+  background: vars.$white-90;
+  border: 1px solid vars.$white-50;
+}
+
+@mixin surface-card {
+  @include surface-light;
+
+  border: 1px solid vars.$gray-200;
+  border-radius: vars.$radius-lg;
+  transition: vars.$transition-all-slow;
+}
+
+@mixin surface-error {
+  background: vars.$white-90;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* ==========================================================================
+   GRADIENT MIXINS
+   ========================================================================== */
+
+@mixin gradient-blue {
+  background: linear-gradient(135deg, vars.$primary-blue, vars.$primary-blue-hover);
+}
+
+@mixin gradient-purple {
+  background: linear-gradient(135deg, vars.$primary-purple, vars.$primary-purple-hover);
+}
+
+@mixin gradient-error {
+  background: linear-gradient(135deg, vars.$error-red, vars.$error-red-hover);
+}
+
+@mixin gradient-rainbow {
+  background: linear-gradient(135deg, vars.$primary-blue, vars.$primary-purple, vars.$primary-indigo);
+}
+
+@mixin gradient-text-blue {
+  background: linear-gradient(135deg, vars.$primary-blue, vars.$primary-purple);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin gradient-glow($color1: vars.$glow-blue, $color2: vars.$glow-purple, $color3: vars.$glow-indigo) {
+  background: linear-gradient(135deg, $color1, $color2, $color3);
+}
+
+/* ==========================================================================
+   BUTTON MIXINS
+   ========================================================================== */
+
+@mixin button-base {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-2;
+
+  padding: vars.$spacing-3 vars.$spacing-6;
+
+  border: none;
+  border-radius: vars.$radius-md;
+  box-shadow: vars.$shadow-md;
+
+  font-weight: vars.$font-weight-semibold;
+  text-decoration: none;
+
+  overflow: hidden;
+  cursor: pointer;
+
+  transition: vars.$transition-all-normal;
+
+  &:hover {
+    box-shadow: vars.$shadow-lg;
+
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  @include gradient-blue;
+
+  color: vars.$white-90;
+
+  &:hover {
+    background: linear-gradient(135deg, vars.$primary-blue-hover, vars.$primary-blue-dark);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  @include gradient-purple;
+
+  color: vars.$white-90;
+
+  &:hover {
+    background: linear-gradient(135deg, vars.$primary-purple-hover, vars.$primary-purple-dark);
+  }
+}
+
+@mixin button-danger {
+  @include button-base;
+  @include gradient-error;
+
+  color: vars.$white-90;
+
+  &:hover {
+    background: linear-gradient(135deg, vars.$error-red-hover, vars.$error-red-dark);
+  }
+}
+
+@mixin button-overlay-effect {
+  .button-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: vars.$white-20;
+
+    transform: scaleX(0);
+    transition: vars.$transition-transform;
+    transform-origin: left;
+  }
+
+  &:hover .button-overlay {
+    transform: scaleX(1);
+  }
+}
+
+/* ==========================================================================
+   CARD MIXINS
+   ========================================================================== */
+
+@mixin card-base {
+  position: relative;
+
+  border-radius: vars.$radius-lg;
+
+  overflow: hidden;
+
+  transition: vars.$transition-all-slow;
+}
+
+@mixin card-surface {
+  @include card-base;
+  @include surface-card;
+}
+
+/* ==========================================================================
+   CONTAINER MIXINS
+   ========================================================================== */
+
+@mixin container-base {
+  width: 100%;
+
+  margin-inline: auto;
+
+  padding: vars.$spacing-8 vars.$spacing-4;
+}
+
+@mixin container-responsive {
+  @include container-base;
+
+  @include tablet-up {
+    max-width: vars.$breakpoint-sm;
+  }
+
+  @include desktop-up {
+    max-width: vars.$breakpoint-md;
+  }
+
+  @include large-up {
+    max-width: vars.$breakpoint-lg;
+  }
+
+  @include extra-large-up {
+    max-width: vars.$breakpoint-xl;
+  }
+}
+
+@mixin container-content {
+  @include container-responsive;
+
+  max-width: 64rem;
+
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   SPINNER MIXINS
+   ========================================================================== */
+
+@mixin spinner-base($size: vars.$size-4, $border-width: 2px) {
+  width: $size;
+  height: $size;
+
+  border: $border-width solid transparent;
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+}
+
+@mixin spinner-primary($size: vars.$size-4) {
+  @include spinner-base($size);
+
+  border-color: vars.$primary-blue;
+  border-block-start-color: transparent;
+}
+
+@mixin spinner-gradient($size: vars.$size-4) {
+  @include spinner-base($size, 4px);
+
+  background: linear-gradient(135deg, vars.$primary-blue, vars.$primary-purple);
+  background-clip: border-box;
+}
+
+/* ==========================================================================
+   SEARCH MIXINS
+   ========================================================================== */
+
+@mixin search-input {
+  width: 100%;
+
+  padding: vars.$spacing-3 vars.$spacing-4;
+  padding-inline-end: vars.$spacing-2;
+
+  @include surface-medium;
+
+  outline: none;
+  border: 1px solid vars.$gray-200;
+  border-radius: vars.$radius-md;
+
+  font-size: vars.$font-size-sm;
+  font-weight: vars.$font-weight-medium;
+  color: vars.$gray-700;
+
+  transition: vars.$transition-all-normal;
+
+  @include tablet-up {
+    width: 20rem;
+  }
+
+  &::placeholder {
+    font-size: vars.$font-size-sm;
+    font-weight: vars.$font-weight-medium;
+    color: vars.$gray-400;
+  }
+
+  &:focus {
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: vars.$gray-300;
+  }
+}
+
+@mixin card-bottom-highlight {
+  .bottom-highlight {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    height: 1px;
+
+    background: linear-gradient(90deg, transparent, rgba(203, 213, 225, 0.5), transparent);
+    opacity: 0;
+
+    transition: vars.$transition-opacity;
+  }
+
+  &:hover .bottom-highlight {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   ANIMATION MIXINS
+   ========================================================================== */
+
+@mixin pulse-animation($color: vars.$primary-blue) {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes pulse {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+  }
+}
+
+@mixin hover-lift {
+  transition: vars.$transition-transform;
+
+  &:hover {
+    transform: scale(1.05) translateY(-2px);
+  }
+}
+
+@mixin hover-scale($scale: 1.05) {
+  transition: vars.$transition-transform;
+
+  &:hover {
+    transform: scale($scale);
+  }
+}
+
+@mixin hover-glow($color: vars.$primary-blue) {
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 0 20px rgba($color, 0.4);
+  }
+}
+
+/* ==========================================================================
+   POSITIONING MIXINS
+   ========================================================================== */
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin absolute-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   TEXT MIXINS
+   ========================================================================== */
+
+@mixin text-truncate {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+}
+
+@mixin text-gradient-blue {
+  @include gradient-text-blue;
+}
+
+@mixin text-mono {
+  font-family: vars.$font-family-mono;
+  font-weight: vars.$font-weight-semibold;
+}
+
+/* ==========================================================================
+   CONTAINER MIXINS
+   ========================================================================== */
+
+@mixin container {
+  width: 100%;
+
+  margin: 0 auto;
+  padding: 0 vars.$spacing-4;
+
+  @include tablet-up {
+    padding: 0 vars.$spacing-6;
+  }
+
+  @include desktop-up {
+    padding: 0 vars.$spacing-8;
+  }
+}
+
+@mixin full-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: vars.$size-screen;
+}
+
+/* ==========================================================================
+   LOADING MIXINS
+   ========================================================================== */
+
+@mixin spinner($size: vars.$size-8, $color: vars.$primary-blue) {
+  width: $size;
+  height: $size;
+
+  border: 2px solid vars.$gray-200;
+  border-top: 2px solid $color;
+  border-radius: vars.$radius-full;
+
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@mixin skeleton {
+  background: linear-gradient(90deg, vars.$gray-200 25%, vars.$gray-300 50%, vars.$gray-200 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
+
+/* ==========================================================================
+   IMAGE MIXINS
+   ========================================================================== */
+
+@mixin image-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@mixin image-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@mixin image-placeholder {
+  @include flex-center;
+
+  background: vars.$gray-200;
+
+  font-size: vars.$font-size-sm;
+  font-weight: vars.$font-weight-medium;
+  color: vars.$gray-400;
+}
+
+/* ==========================================================================
+   UTILITY MIXINS
+   ========================================================================== */
+
+@mixin visually-hidden {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  margin: -1px;
+  padding: 0;
+
+  border: 0;
+
+  white-space: nowrap;
+
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+@mixin reset-button {
+  margin: 0;
+  padding: 0;
+
+  background: none;
+  border: none;
+
+  font: inherit;
+  color: inherit;
+
+  cursor: pointer;
+}
+
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}

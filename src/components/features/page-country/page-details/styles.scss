@@ -1,0 +1,137 @@
+@use "@/styles/mixins" as mixins;
+@use "@/styles/variables" as vars;
+
+.page-details {
+  display: grid;
+  gap: vars.$spacing-6;
+  padding: vars.$spacing-8;
+
+  @include mixins.desktop-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &__card {
+    background: vars.$gray-50;
+    border-radius: vars.$radius-md;
+    padding: vars.$spacing-6;
+
+    &-header {
+      display: flex;
+      align-items: center;
+      gap: vars.$spacing-2;
+      margin-bottom: vars.$spacing-4;
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      gap: vars.$spacing-2;
+    }
+  }
+
+  &__card-icon {
+    width: vars.$size-5;
+    height: vars.$size-5;
+
+    margin-inline-end: vars.$spacing-2;
+
+    &.blue {
+      color: vars.$primary-blue;
+    }
+
+    &.green {
+      color: #059669;
+    }
+
+    &.purple {
+      color: vars.$primary-purple;
+    }
+
+    &.indigo {
+      color: vars.$primary-indigo;
+    }
+  }
+
+  &__card-title {
+    font-size: vars.$font-size-lg;
+    font-weight: vars.$font-weight-semibold;
+    color: vars.$gray-700;
+  }
+
+  &__info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__label {
+    color: vars.$gray-600;
+  }
+
+  &__value {
+    font-family: vars.$font-family-mono;
+    padding: vars.$spacing-1 vars.$spacing-3;
+    border-radius: vars.$radius-sm;
+    font-size: vars.$font-size-sm;
+    font-weight: vars.$font-weight-semibold;
+
+    &.blue {
+      background: #dbeafe;
+      color: vars.$primary-blue-dark;
+    }
+
+    &.green {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    &.purple {
+      background: #e9d5ff;
+      color: vars.$primary-purple-dark;
+    }
+
+    &.indigo {
+      background: #e0e7ff;
+      color: vars.$primary-indigo-hover;
+    }
+  }
+
+  &__flag-image-container {
+    position: relative;
+
+    width: 100%;
+    height: 12rem;
+
+    border: 1px solid vars.$gray-200;
+    border-radius: vars.$radius-md;
+    background: vars.$gray-200;
+
+    overflow: hidden;
+
+    .flag-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .flag-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: vars.$gray-200;
+      color: vars.$gray-500;
+      font-size: vars.$font-size-sm;
+      font-weight: vars.$font-weight-medium;
+      text-align: center;
+    }
+  }
+
+  &__description {
+    color: vars.$gray-600;
+    font-size: vars.$font-size-sm;
+    text-align: center;
+    font-style: italic;
+  }
+}

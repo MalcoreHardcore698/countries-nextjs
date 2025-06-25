@@ -1,0 +1,342 @@
+@use "variables" as vars;
+@use "mixins";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100vw;
+
+  background: vars.$gray-50;
+
+  font-family: vars.$font-family-sans;
+  font-weight: vars.$font-weight-normal;
+  line-height: vars.$line-height-normal;
+  color: vars.$gray-900;
+
+  overflow-x: hidden;
+}
+
+body {
+  min-height: vars.$size-screen;
+
+  background: linear-gradient(135deg, vars.$gray-50, vars.$gray-100);
+
+  color: vars.$gray-900;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  @include mixins.reset-button;
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+.container {
+  @include mixins.container;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-gradient {
+  @include mixins.text-gradient-blue;
+}
+
+.sr-only {
+  @include mixins.visually-hidden;
+}
+
+// Spacing utilities
+.mb-4 {
+  margin-bottom: vars.$spacing-4;
+}
+
+.mb-6 {
+  margin-bottom: vars.$spacing-6;
+}
+
+.mb-8 {
+  margin-bottom: vars.$spacing-8;
+}
+
+.mt-4 {
+  margin-top: vars.$spacing-4;
+}
+
+.mt-6 {
+  margin-top: vars.$spacing-6;
+}
+
+.mt-8 {
+  margin-top: vars.$spacing-8;
+}
+
+.p-4 {
+  padding: vars.$spacing-4;
+}
+
+.p-6 {
+  padding: vars.$spacing-6;
+}
+
+.p-8 {
+  padding: vars.$spacing-8;
+}
+
+// Layout utilities
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: vars.$size-full;
+}
+
+.h-full {
+  height: vars.$size-full;
+}
+
+.min-h-screen {
+  min-height: vars.$size-screen;
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out;
+}
+
+// ============================================================================
+// RESPONSIVE UTILITIES
+// ============================================================================
+
+.hidden {
+  display: none;
+}
+
+@include mixins.mobile-only {
+  .md\:hidden {
+    display: none;
+  }
+
+  .mobile\:block {
+    display: block;
+  }
+
+  .mobile\:flex {
+    display: flex;
+  }
+}
+
+@include mixins.tablet-up {
+  .md\:block {
+    display: block;
+  }
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+}
+
+// ============================================================================
+// COMPONENTS
+// ============================================================================
+
+.btn {
+  @include mixins.button-base;
+
+  &.btn-primary {
+    @include mixins.button-primary;
+  }
+
+  &.btn-secondary {
+    @include mixins.button-secondary;
+  }
+
+  &.btn-danger {
+    @include mixins.button-danger;
+  }
+}
+
+.card {
+  @include mixins.card-surface;
+
+  padding: vars.$spacing-6;
+}
+
+.spinner {
+  @include mixins.spinner;
+}
+
+.skeleton {
+  @include mixins.skeleton;
+
+  & {
+    height: vars.$spacing-4;
+    border-radius: vars.$radius-sm;
+  }
+}
+
+// ============================================================================
+// LOADING STATES
+// ============================================================================
+
+.loading-container {
+  @include mixins.full-screen;
+
+  flex-direction: column;
+  gap: vars.$spacing-6;
+
+  .loading-spinner {
+    @include mixins.spinner(vars.$size-12, vars.$primary-blue);
+  }
+
+  .loading-text {
+    font-size: vars.$font-size-lg;
+    font-weight: vars.$font-weight-medium;
+    color: vars.$gray-600;
+    text-align: center;
+
+    @include mixins.text-gradient-blue;
+  }
+}
+
+// ============================================================================
+// ERRORS
+// ============================================================================
+
+.error-container {
+  @include mixins.full-screen;
+
+  flex-direction: column;
+  gap: vars.$spacing-4;
+  text-align: center;
+
+  .error-icon {
+    font-size: vars.$font-size-6xl;
+    color: vars.$error-red;
+  }
+
+  .error-title {
+    font-size: vars.$font-size-2xl;
+    font-weight: vars.$font-weight-bold;
+    color: vars.$error-red-dark;
+  }
+
+  .error-message {
+    font-size: vars.$font-size-lg;
+    color: vars.$error-red-hover;
+    line-height: vars.$line-height-relaxed;
+  }
+}
+
+// ============================================================================
+// MEDIA QUERIES
+// ============================================================================
+
+@include mixins.mobile-only {
+  .container {
+    padding: 0 vars.$spacing-3;
+  }
+
+  .btn {
+    padding: vars.$spacing-3 vars.$spacing-4;
+    font-size: vars.$font-size-sm;
+  }
+}
+
+@include mixins.tablet-up {
+  .container {
+    max-width: vars.$breakpoint-md;
+  }
+}
+
+@include mixins.desktop-up {
+  .container {
+    max-width: vars.$breakpoint-lg;
+  }
+}
+
+@include mixins.large-up {
+  .container {
+    max-width: vars.$breakpoint-xl;
+  }
+}

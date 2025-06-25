@@ -1,0 +1,49 @@
+@use "@/styles/variables" as vars;
+@use "@/styles/mixins" as mixins;
+
+.placeholder-loader {
+  @include mixins.flex-center;
+
+  flex: 1;
+
+  margin-block-end: vars.$spacing-10;
+
+  .loading-card {
+    @include mixins.surface-card;
+
+    padding: vars.$spacing-8;
+
+    text-align: center;
+
+    .spinner-container {
+      position: relative;
+      margin: 0 auto vars.$spacing-6;
+
+      .spinner {
+        @include mixins.spinner-gradient(vars.$size-16);
+      }
+
+      .spinner-inner {
+        position: absolute;
+        top: vars.$spacing-2;
+        left: vars.$spacing-2;
+        right: vars.$spacing-2;
+        bottom: vars.$spacing-2;
+        background: white;
+        border-radius: 50%;
+      }
+    }
+
+    .main-text {
+      color: vars.$gray-700;
+      font-weight: vars.$font-weight-medium;
+      font-size: vars.$font-size-lg;
+    }
+
+    .sub-text {
+      color: vars.$gray-500;
+      font-size: vars.$font-size-sm;
+      margin-top: vars.$spacing-2;
+    }
+  }
+}

@@ -1,0 +1,110 @@
+@use "@/styles/mixins" as mixins;
+@use "@/styles/variables" as vars;
+
+.error-boundary {
+  @include mixins.full-screen;
+
+  background: linear-gradient(135deg, vars.$error-bg, vars.$error-bg-secondary, vars.$error-bg-tertiary);
+
+  padding: vars.$spacing-4;
+
+  .error-container {
+    @include mixins.surface-error;
+
+    max-width: 32rem;
+
+    padding: vars.$spacing-8;
+
+    border-radius: vars.$radius-lg;
+
+    text-align: center;
+
+    .error-icon {
+      font-size: vars.$font-size-6xl;
+      color: vars.$error-red;
+
+      margin-block-end: vars.$spacing-6;
+    }
+
+    .error-title {
+      font-size: vars.$font-size-2xl;
+      font-weight: vars.$font-weight-bold;
+      color: vars.$error-red-dark;
+
+      margin-block-end: vars.$spacing-4;
+    }
+
+    .error-message {
+      line-height: vars.$line-height-relaxed;
+      color: vars.$error-red-hover;
+
+      margin-block-end: vars.$spacing-6;
+    }
+
+    .error-details {
+      text-align: left;
+
+      margin-block-end: vars.$spacing-6;
+
+      .details-summary {
+        font-size: vars.$font-size-sm;
+        font-weight: vars.$font-weight-medium;
+        color: vars.$error-red-hover;
+
+        margin-block-end: vars.$spacing-2;
+
+        cursor: pointer;
+      }
+
+      .details-content {
+        max-height: vars.$size-10 * 2;
+
+        padding: vars.$spacing-4;
+
+        background: vars.$error-bg;
+        border-radius: vars.$radius-sm;
+
+        font-size: vars.$font-size-xs;
+        font-family: vars.$font-family-mono;
+        color: vars.$error-red-darkest;
+
+        overflow: auto;
+
+        .error-name {
+          font-weight: vars.$font-weight-bold;
+
+          margin-block-end: vars.$spacing-2;
+        }
+
+        .error-stack {
+          white-space: pre-wrap;
+        }
+      }
+    }
+
+    .error-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: vars.$spacing-3;
+
+      @include mixins.tablet-up {
+        flex-direction: row;
+      }
+
+      .action-button {
+        @include mixins.button-base;
+
+        color: vars.$white-90;
+
+        &.retry-button {
+          @include mixins.button-danger;
+        }
+
+        &.home-button {
+          @include mixins.button-primary;
+        }
+      }
+    }
+  }
+}

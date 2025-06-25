@@ -1,0 +1,49 @@
+@use "@/styles/mixins" as mixins;
+@use "@/styles/variables" as vars;
+
+.placeholder-error {
+  @include mixins.flex-center;
+
+  flex: 1;
+
+  .error-card {
+    @include mixins.flex-center;
+    @include mixins.surface-error;
+
+    flex-direction: column;
+
+    min-width: 20rem;
+
+    padding: vars.$spacing-8;
+
+    border-radius: vars.$radius-lg;
+
+    text-align: center;
+
+    .error-icon {
+      font-size: vars.$font-size-6xl;
+      color: vars.$error-red;
+
+      margin-block-end: vars.$spacing-6;
+    }
+
+    h2 {
+      font-size: vars.$font-size-2xl;
+      font-weight: vars.$font-weight-bold;
+      color: vars.$error-red-dark;
+
+      margin-block-end: vars.$spacing-4;
+    }
+
+    .error-message {
+      line-height: vars.$line-height-relaxed;
+      color: vars.$error-red-hover;
+
+      margin-block-end: vars.$spacing-6;
+    }
+
+    .retry-button {
+      @include mixins.button-danger;
+    }
+  }
+}
