@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Demo - [countries-nextjs.vercel.app](https://countries-nextjs.vercel.app/)
+## Demo - [countries-nestjs.vercel.app](https://countries-nestjs.vercel.app/)
 
 ## Getting Started
 
